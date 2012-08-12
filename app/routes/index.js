@@ -40,9 +40,9 @@ exports.index = function(req, res) {
 		} else if (renderData.keyType == 'list') {
 			client.lrange(key,0,-1, this);
 		} else if (renderData.keyType == 'set') {
-			
+			client.smembers(key, this);
 		} else if (renderData.keyType == 'zset') {
-			
+			client.zrange(key,0,-1,this);
 		} else if (renderData.keyType == 'hash') {
 			client.hgetall(key, this);
 		}
@@ -60,6 +60,7 @@ exports.index = function(req, res) {
 				renderData.content = (content); 
 			} else {
 				if (util.isArray(content)) {
+					var tempArray = new Array();
 					content.forEach(function(c,i) {
 						try {
 							json = JSON.parse(c);
@@ -67,16 +68,17 @@ exports.index = function(req, res) {
 						} catch (e) {
 							// do nothing
 						}
-						renderData.content += "\n" +  (c);
+						tempArray.push(c);
 					});
-				} else {
-					renderData.content = JSON.stringify(content, null, 4);
-				}	
+					renderData.content = tempArray;
+				}
+				
+				renderData.content = JSON.stringify(content, null, 4);	
 			}
 		} else {
 			renderData.content = err;
 		}
-		
+		(client && client.end());
 		self.render('index', renderData);		     
 	 }
   );
