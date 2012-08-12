@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>	
+	<link rel='stylesheet' href='/stylesheets/style-clearfix.css' />
+	<link rel='stylesheet' href='/stylesheets/app.css' />
+	<script type="text/javascript" src="/javascripts/shCore.js"></script>
+	<script type="text/javascript" src="/javascripts/shBrushJScript.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>	
+  </head>
+  <body>
+
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#"><%= title %></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+            <ul class="nav nav-tabs nav-stacked">
+			  <% for(var i=0; i<keys.length; i++) {%>
+					<li><a href="/?key=<%= keys[i] %>"><%= keys[i].substring(0,34) + ((keys[i].length > 34) ? '...' : '') %></a></li>
+			  <% } %>			  	
+            </ul>
+        </div><!--/span-->
+        <div class="span9">
+          
+			<% if (typeof key != 'undefined') { %>
+				<div class="well">
+				<h2><%= key %></h2>
+				<span class="label"><%= keyType %></span>
+				<br />
+				<pre class="brush: js;ruler: false;gutter: false;"><%= content %></pre>
+				</div>
+			<% } %>
+			
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->  
+
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+</html>
