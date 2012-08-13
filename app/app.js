@@ -3,13 +3,17 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path');
+  , routes  = require('./routes')
+  , http    = require('http')
+  , path    = require('path')
+  
+  , config  = require('../config');
 
 var app = express();
 
 app.configure(function(){
+  app.set('redisHost', config.redisHost);
+  app.set('redisPort', config.redisPort);
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');

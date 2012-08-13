@@ -1,14 +1,20 @@
 /*
  * GET home page.
  */
-var redis       = require('redis');
 var util        = require('util');
 var step        = require('step');
+var redis       = require('redis');
 
 exports.index = function(req, res) {
-  client = redis.createClient();	
-  
+
   var self = res;
+
+  var port = req.app.get('redisPort');
+  var host = req.app.get('redisHost');
+  var client = redis.createClient(port, host);
+
+  var key = req.query.key;
+  
   renderData = {
 	  title : "Node Redis Browser",
 	  keys: [],
@@ -17,7 +23,6 @@ exports.index = function(req, res) {
 	  content: ''
   };
   
-  var key = req.query.key;
   step(
      function getKey() {
 		client.keys("*", this.parallel());	
@@ -26,7 +31,8 @@ exports.index = function(req, res) {
 		client.type(key, this.parallel());
 	 }, 
 	 
-	 function getContent(err, keys, keyType) {
+	 function getContent(err, keys, keyType) {		
+		
 		renderData.keys = keys;
 		
 		if (typeof keyType != 'undefined') {
@@ -45,6 +51,9 @@ exports.index = function(req, res) {
 			client.zrange(key,0,-1,this);
 		} else if (renderData.keyType == 'hash') {
 			client.hgetall(key, this);
+		} else {
+			// to call next callback step
+			this(null,'');
 		}
 	 },	 	 
 	 
