@@ -1,7 +1,8 @@
 node-redis-browser
 ==================
 
-Basically a simple development tool that help in browsing redis keys trough web browser
+Basically a simple development tool that help in browsing redis keys trough web browser in a way similar to phpMyAdmin, this is because 
+I need nodejs based one so no need to install complicated dependencies on my instances.
 
 # Disclaimer
 A playground in node, so do not expect much 'feature' from this one *smirk*
