@@ -19,6 +19,9 @@ cd app
 node app.js
 ```
 
+# Browser
+Depend on the port specified on your `config.js`, just open http://localhost:3000/
+
 # Dependencies
 Express - for web framework
 EJS  - template view

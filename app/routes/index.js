@@ -14,33 +14,33 @@ exports.index = function(req, res) {
   var client = redis.createClient(port, host);
 
   var key = req.query.key;
-  
+
   renderData = {
-	  title : "Node Redis Browser",
-	  keys: [],
-	  keyType: '',
-	  key: '',
-	  content: ''
+	title : "Node Redis Browser",
+	keys: [],
+	keyType: '',
+	key: '',
+	content: ''
   };
-  
+
   step(
      function getKey() {
-		client.keys("*", this.parallel());	
-		
+		client.keys("*", this.parallel());
+
 		renderData.key = key;
 		client.type(key, this.parallel());
-	 }, 
-	 
-	 function getContent(err, keys, keyType) {		
-		
+	},
+
+	function getContent(err, keys, keyType) {
+
 		renderData.keys = keys;
-		
+
 		if (typeof keyType != 'undefined') {
 			renderData.keyType = keyType;
 		} else {
 			renderData.keyType = undefined;
 		}
-		
+
 		if (renderData.keyType == 'string') {
 			client.get(key, this);
 		} else if (renderData.keyType == 'list') {
@@ -55,10 +55,10 @@ exports.index = function(req, res) {
 			// to call next callback step
 			this(null,'');
 		}
-	 },	 	 
-	 
-	 function finalize(err, content) {
-		if (!err) { 
+	},
+
+	function finalize(err, content) {
+		if (!err) {
 			if (typeof content == 'string') {
 				try {
 					json = JSON.parse(content);
@@ -66,7 +66,7 @@ exports.index = function(req, res) {
 				} catch (e) {
 					// do nothing
 				}
-				renderData.content = (content); 
+				renderData.content = (content);
 			} else {
 				if (util.isArray(content)) {
 					var tempArray = new Array();
@@ -81,15 +81,15 @@ exports.index = function(req, res) {
 					});
 					renderData.content = tempArray;
 				}
-				
-				renderData.content = JSON.stringify(content, null, 4);	
+
+				renderData.content = JSON.stringify(content, null, 4);
 			}
 		} else {
 			renderData.content = err;
 		}
 		(client && client.end());
-		self.render('index', renderData);		     
-	 }
+		self.render('index', renderData);
+	}
   );
-  
+
 };

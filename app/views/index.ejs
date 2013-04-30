@@ -12,12 +12,12 @@
       .sidebar-nav {
         padding: 9px 0;
       }
-    </style>	
+    </style>
 	<link rel='stylesheet' href='/stylesheets/style-clearfix.css' />
 	<link rel='stylesheet' href='/stylesheets/app.css' />
 	<script type="text/javascript" src="/javascripts/shCore.js"></script>
 	<script type="text/javascript" src="/javascripts/shBrushJScript.js"></script>
-	<script type="text/javascript">SyntaxHighlighter.all();</script>	
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
   </head>
   <body>
 
@@ -40,11 +40,11 @@
             <ul class="nav nav-tabs nav-stacked">
 			  <% for(var i=0; i<keys.length; i++) {%>
 					<li><a href="/?key=<%= keys[i] %>"><%= keys[i].substring(0,34) + ((keys[i].length > 34) ? '...' : '') %></a></li>
-			  <% } %>			  	
+			  <% } %>
             </ul>
         </div><!--/span-->
         <div class="span9">
-          
+
 			<% if (typeof key != 'undefined') { %>
 				<div class="well">
 				<h2><%= key %></h2>
@@ -53,7 +53,7 @@
 				<pre class="brush: js;ruler: false;gutter: false;"><%= content %></pre>
 				</div>
 			<% } %>
-			
+
         </div><!--/span-->
       </div><!--/row-->
 
@@ -63,7 +63,7 @@
         <p>&copy; Appsindo Technology 2012</p>
       </footer>
 
-    </div><!--/.fluid-container-->  
+    </div><!--/.fluid-container-->
 
   <script src="/javascripts/jquery.min.js"></script>
   <script src="/javascripts/bootstrap.min.js"></script>
