@@ -6,16 +6,23 @@ Basically a simple development tool that help in browsing redis keys trough web 
 # Disclaimer
 A playground in node, so do not expect much 'feature' from this one *smirk*
 
+# Install
+```bash
+cd app
+npm install
+```
+
 # Run
 ```bash
-node app\app.js
+cd app
+node app.js
 ```
 
 # Dependencies
 Express - for web framework
-EJS     - template view
+EJS  - template view
 Step    - for flow control (avoiding complicated callbacks)
-Redis   
+Redis
 
 # Included Components
 Syntax Highlighter
