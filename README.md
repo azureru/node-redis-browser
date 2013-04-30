@@ -21,14 +21,14 @@ node app.js
 # Dependencies
 Express - for web framework
 EJS  - template view
-Step    - for flow control (avoiding complicated callbacks)
+Step - for flow control (avoiding complicated callbacks)
 Redis
 
 # Included Components
-Syntax Highlighter
+Syntax Highlighter (http://alexgorbatchev.com/SyntaxHighlighter)
 
 # Authors
-Erwin Maulana Saputra <erwin.saputra@at.co.id>
+Erwin Maulana Saputra <erwin.saputra@at.co.id> @azureru
 
 # License
 Dont Be A Jerk License
